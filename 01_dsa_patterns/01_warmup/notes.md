@@ -113,3 +113,97 @@ public String reverseVowels(String s) {
     return new String(arr);
 }
 ```
+
+## Problem: Number of Good Pairs (Hashing/Array Lookup)
+
+**Optimal Solution (MTS Level):**
+* **Time:** O(N)
+* **Space:** O(1) assuming the constraints are fixed (e.g., `1 <= nums[i] <= 100`). Otherwise O(N) with HashMap.
+
+**Why it works:**
+Using a fixed-size `int[]` array based on the problem constraints completely eliminates the hashing overhead, object boxing (`int` to `Integer`), and garbage collection footprint of a generic `HashMap`. The postfix increment (`counts[n]++`) elegantly accumulates pairs and increments the frequency map in a single atomic-like operation.
+
+**The Code Skeleton (Java)**
+```java
+int[] counts = new int[101]; // Assuming constraints 1 <= nums[i] <= 100
+int pairCount = 0;
+for (int n : nums) {
+    pairCount += counts[n]++; // Adds current count to pairs, THEN increments the count.
+}
+return pairCount;
+```
+
+## Problem: Shortest Word Distance (Two Pointers)
+
+**Optimal Solution (MTS Level):**
+* **Time:** O(N * L) where L is string length.
+* **Space:** O(1)
+
+**Why it works:**
+Only recalculate the shortest distance *when one of the pointers actually moves*. Placing the distance calculation inside the `if/else` block prevents redundant `Math.min()` executions. Since `i` is guaranteed to be the larger position at that moment, `Math.abs()` is entirely unnecessary.
+
+**The Code Skeleton (Java)**
+```java
+int shortestDistance = words.length;
+int position1 = -1, position2 = -1; 
+
+for (int i = 0; i < words.length; i++) {
+    if (words[i].equals(word1)) {
+        position1 = i;
+        if (position2 != -1) shortestDistance = Math.min(shortestDistance, i - position2);
+    } else if (words[i].equals(word2)) {
+        position2 = i;
+        if (position1 != -1) shortestDistance = Math.min(shortestDistance, i - position1);
+    }
+}
+return shortestDistance;
+```
+
+## Problem: Square Root (Binary Search)
+
+**Optimal Solution (MTS Level):**
+* **Time:** O(log X)
+* **Space:** O(1)
+
+**Why it works:**
+The critical aspect of this pattern is explicitly guarding against integer overflow. Using `left + (right - left) / 2` calculates the mid safely. Casting `(long) mid * mid` guarantees the square does not overflow a 32-bit signed integer before the comparison.
+
+**The Code Skeleton (Java)**
+```java
+int left = 0, right = x, res = 0;
+while (left <= right) {
+    int mid = left + (right - left) / 2;
+    if ((long) mid * mid <= x) {
+        res = mid;
+        left = mid + 1;
+    } else {
+        right = mid - 1;
+    }
+}
+return res;
+```
+
+## Problem: Valid Anagram (Frequency Array)
+
+**Optimal Solution (MTS Level):**
+* **Time:** O(N)
+* **Space:** O(1)
+
+**Why it works:**
+Since the character set is restricted to lowercase English letters, a fixed `int[26]` frequency array completely circumvents the `O(N log N)` penalty of sorting and the memory overhead of a `HashMap`. One pass increments counts for `s` and decrements for `t`.
+
+**The Code Skeleton (Java)**
+```java
+if (s.length() != t.length()) return false;
+
+int[] characters = new int[26];
+for (int i = 0; i < s.length(); i++) {
+    characters[s.charAt(i) - 'a']++;
+    characters[t.charAt(i) - 'a']--;
+}
+
+for (int val : characters) {
+    if (val != 0) return false;
+}
+return true;
+```

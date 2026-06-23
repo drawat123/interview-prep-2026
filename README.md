@@ -17,3 +17,8 @@
 * **The Fix (Valid Palindrome):** Used tight inner `while (l < r && !Character.isLetterOrDigit(s.charAt(l)))` loops to skip invalid characters efficiently. Deferred lowercase casting until the direct comparison step.
 * **The Bug (Reverse Vowels):** Instantiated a `HashSet<Character>` inside the method, causing severe boxing/unboxing overhead and garbage collection pressure on every call. Erroneously used `StringBuilder` when mutating a string, masking an `O(N)` space allocation behind method overhead.
 * **The Fix (Reverse Vowels):** Eliminated the `HashSet` entirely by using a `static boolean isVowel(char)` method powered by an enhanced `switch` expression for `O(1)` lookup with zero boxing. Switched to a raw `char[]` array for direct `O(1)` index swaps instead of using `StringBuilder`.
+* **The Bug (Number of Good Pairs):** Used a `HashMap` despite constrained inputs, introducing severe boxing and hashing overhead.
+* **The Fix (Number of Good Pairs):** Leveraged an `int[] counts = new int[101]` and compressed the logic using a postfix increment `pairCount += counts[n]++;` to elegantly sum and increment simultaneously.
+* **The Bug (Shortest Word Distance):** Placed the distance calculation `Math.min()` outside the pointer-check branches, causing redundant executions on irrelevant words.
+* **The Fix (Shortest Word Distance):** Moved the calculation inside the `if` branches and eliminated `Math.abs()` since the current index `i` is guaranteed to be the larger value.
+* **The Fix (Square Root / Valid Anagram):** Flawless execution. Guarded overflow correctly with `left + (right - left) / 2` and `(long) mid * mid`, and avoided `HashMap` with an `int[26]` frequency array.
