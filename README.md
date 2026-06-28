@@ -29,4 +29,4 @@
 
 * **The Bug (Engineering Hygiene):** Created a markdown file with a `?` character in the filename (`02_back-of-the-envelope_estimations?.md`). Special characters in filenames break shell scripts, build pipelines, and CI/CD tools.
 * **The Fix (Engineering Hygiene):** Renamed the file to strip the `?`.
-* **System Design Check-In (Load Balancing):** Successfully documented L4/L7 load balancing algorithms. Entering Senior/MTS level pushback grill.
+* **System Design Check-In (Load Balancing):** Successfully documented core load balancing algorithms. Faced Senior/MTS level pushback. Identified knowledge gaps in HTTP/2 Multiplexing, Stateless Architecture (Redis/Thundering Herd mitigation), and L4 vs L7 routing profiles. Created advanced Q&A notes to bridge these gaps.
