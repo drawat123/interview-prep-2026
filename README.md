@@ -22,3 +22,11 @@
 * **The Bug (Shortest Word Distance):** Placed the distance calculation `Math.min()` outside the pointer-check branches, causing redundant executions on irrelevant words.
 * **The Fix (Shortest Word Distance):** Moved the calculation inside the `if` branches and eliminated `Math.abs()` since the current index `i` is guaranteed to be the larger value.
 * **The Fix (Square Root / Valid Anagram):** Flawless execution. Guarded overflow correctly with `left + (right - left) / 2` and `(long) mid * mid`, and avoided `HashMap` with an `int[26]` frequency array.
+
+## [2026-06-28] Tuesday
+**Focus:** High-Level System Design (Grokking Vol I / Vol II)
+**Hours Logged:** 1.5h
+
+* **The Bug (Engineering Hygiene):** Created a markdown file with a `?` character in the filename (`02_back-of-the-envelope_estimations?.md`). Special characters in filenames break shell scripts, build pipelines, and CI/CD tools.
+* **The Fix (Engineering Hygiene):** Renamed the file to strip the `?`.
+* **System Design Check-In (Load Balancing):** Successfully documented L4/L7 load balancing algorithms. Entering Senior/MTS level pushback grill.
