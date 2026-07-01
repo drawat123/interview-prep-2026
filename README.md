@@ -30,3 +30,14 @@
 * **The Bug (Engineering Hygiene):** Created a markdown file with a `?` character in the filename (`02_back-of-the-envelope_estimations?.md`). Special characters in filenames break shell scripts, build pipelines, and CI/CD tools.
 * **The Fix (Engineering Hygiene):** Renamed the file to strip the `?`.
 * **System Design Check-In (Load Balancing):** Successfully documented core load balancing algorithms. Faced Senior/MTS level pushback. Identified knowledge gaps in HTTP/2 Multiplexing, Stateless Architecture (Redis/Thundering Herd mitigation), and L4 vs L7 routing profiles. Created advanced Q&A notes to bridge these gaps.
+
+## [2026-07-01] Wednesday
+**Focus:** DSA Patterns - Two Pointers (Advanced)
+**Hours Logged:** 1.5h
+
+* **The Bug (Squaring Sorted Array):** Massively over-engineered the solution by using Binary Search to find the zero-crossing, followed by an outward-moving merge with 3 separate `while` loops.
+* **The Fix (Squaring Sorted Array):** Leveraged the mathematical property of sorted arrays (largest squares are always at the outermost edges). Used Inward-Moving Pointers to compare the absolute ends and write directly to the end of the new array. Reduced `O(log N) + O(N)` complexity to a strict, elegant `O(N)` single pass.
+* **The Bug (Triplet Sum to Zero):** Created inefficient routing logic by combining `currSum < 0` and `currSum == 0`. Failed to eagerly decrement the right pointer when a match was found, causing wasted loop iterations.
+* **The Fix (Triplet Sum to Zero):** Explicitly branched logic. Aggressively incremented/decremented both pointers and aggressively skipped duplicates on both ends the moment a valid triplet was added to the list, maximizing CPU efficiency.
+* **The Bug (Remove Duplicates):** Wrote perfect `O(N)` logic but failed to include a guard clause for empty arrays, risking an `ArrayIndexOutOfBoundsException` at `arr[0]`.
+* **The Fix (Remove Duplicates):** Added immediate guard clause `if (arr == null || arr.length == 0) return 0;` (MTS baseline standard).
