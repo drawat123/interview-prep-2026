@@ -41,3 +41,16 @@
 * **The Fix (Triplet Sum to Zero):** Explicitly branched logic. Aggressively incremented/decremented both pointers and aggressively skipped duplicates on both ends the moment a valid triplet was added to the list, maximizing CPU efficiency.
 * **The Bug (Remove Duplicates):** Wrote perfect `O(N)` logic but failed to include a guard clause for empty arrays, risking an `ArrayIndexOutOfBoundsException` at `arr[0]`.
 * **The Fix (Remove Duplicates):** Added immediate guard clause `if (arr == null || arr.length == 0) return 0;` (MTS baseline standard).
+
+## [2026-07-05] Saturday — 🔀 PIVOT: Backend → C++ Systems Software Engineer
+**Focus:** Career-track pivot. Retargeting prep from generic senior backend to **C++ Systems Software Engineer** (Sophos, Microsoft, NVIDIA, Cloudflare, Google Infra).
+**Hours Logged:** —
+
+* **The Decision:** 6 yrs experience (4 C++/MFC, 2 backend). On the backend path my short backend tenure risks an L4 down-level; on the systems path my C++ years count fully. Systems work also matches my instincts (the Java side project gravitated to concurrency/backpressure/lock-free naturally).
+* **What changes:**
+  * **Dropped:** Microservices design patterns. DataLemur SQL (`03_datalemur_sql` archived from core prep, kept strictly as a weekend hobby).
+  * **Added pillars:** Modern C++ mastery (`05_cpp_mastery`), OS fundamentals (`06_os_systems`), concurrency/lock-free (`07_concurrency`), systems programming + networking (`08_systems_programming`), performance engineering (`09_performance`), low-level design (`04_low_level_design`).
+  * **Kept:** DSA (now coded in **C++**, not Java) and high-level system design (still tested for infra roles).
+  * **Side project:** freeze `micro-thingsboard` (Java) as a design/comparison artifact; new flagship = the same telemetry engine rebuilt in **modern C++** in its own repo (`micro-thingsboard-cpp`).
+* **Biggest risk to close:** 4 yrs of C++ was MFC-era — must prove *modern* C++ (C++17/20). Modern-C++ mastery is front-loaded (Phase 0).
+* **Reference:** full plan in `systems_roadmap.md`; revised cadence in `weekly_template.md`.
