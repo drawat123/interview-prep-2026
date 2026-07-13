@@ -54,3 +54,10 @@
   * **Side project:** freeze `micro-thingsboard` (Java) as a design/comparison artifact; new flagship = the same telemetry engine rebuilt in **modern C++** in its own repo (`micro-thingsboard-cpp`).
 * **Biggest risk to close:** 4 yrs of C++ was MFC-era — must prove *modern* C++ (C++17/20). Modern-C++ mastery is front-loaded (Phase 0).
 * **Reference:** full plan in `systems_roadmap.md`; revised cadence in `weekly_template.md`.
+
+## [2026-07-13] Monday
+**Focus:** DSA Patterns in C++ (Two Pointers)
+**Hours Logged:** 1.5h
+
+* **The Bug (API & Types):** Mutated caller's array by passing non-const reference `std::vector<int>&` into `std::sort()`. Triggered unsigned integer underflow (UB) by computing `arr.size() - 2` without checking if size < 2. Failed to cast to `long long` when subtracting from `targetSum`, risking standard integer overflow.
+* **The Fix (API & Types):** Reverted signature to pass-by-value `std::vector<int> arr` to protect caller state. Added strict guard clause `if (arr.size() < 3) return 0;` to prevent `size_t` wrap-around. Casted `targetSum` to `long long` before sequential subtraction to guarantee mathematical safety.
