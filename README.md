@@ -61,3 +61,11 @@
 
 * **The Bug (API & Types):** Mutated caller's array by passing non-const reference `std::vector<int>&` into `std::sort()`. Triggered unsigned integer underflow (UB) by computing `arr.size() - 2` without checking if size < 2. Failed to cast to `long long` when subtracting from `targetSum`, risking standard integer overflow.
 * **The Fix (API & Types):** Reverted signature to pass-by-value `std::vector<int> arr` to protect caller state. Added strict guard clause `if (arr.size() < 3) return 0;` to prevent `size_t` wrap-around. Casted `targetSum` to `long long` before sequential subtraction to guarantee mathematical safety.
+
+## [2026-07-14] Tuesday
+**Focus:** OS Fundamentals (OSTEP Intro)
+**Hours Logged:** 1.5h
+
+* **The Execution:** Completed core introductory reading on the Three Easy Pieces: Virtualization, Concurrency, and Persistence. Connected theoretical OS illusions (infinite CPUs, private address spaces) to real-world systems engineering (context switching, virtual memory mappings, and non-atomic instruction traps).
+* **The Blindspot (OS/Memory):** Knew that processes do not share physical memory, but missed the *mechanism*: the OS maintains a **Page Table** for each process to map virtual addresses to physical frames via the hardware MMU.
+* **The Blindspot (C++ Concurrency):** Forgot the `<atomic>` library. To safely increment a shared counter without a mutex, use `std::atomic<int>`, which relies on hardware-level atomic instructions (like Compare-And-Swap) to lock the cache line.
