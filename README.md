@@ -69,3 +69,20 @@
 * **The Execution:** Completed core introductory reading on the Three Easy Pieces: Virtualization, Concurrency, and Persistence. Connected theoretical OS illusions (infinite CPUs, private address spaces) to real-world systems engineering (context switching, virtual memory mappings, and non-atomic instruction traps).
 * **The Blindspot (OS/Memory):** Knew that processes do not share physical memory, but missed the *mechanism*: the OS maintains a **Page Table** for each process to map virtual addresses to physical frames via the hardware MMU.
 * **The Blindspot (C++ Concurrency):** Forgot the `<atomic>` library. To safely increment a shared counter without a mutex, use `std::atomic<int>`, which relies on hardware-level atomic instructions (like Compare-And-Swap) to lock the cache line.
+
+## [2026-07-15] Wednesday
+**Focus:** DSA Patterns in C++ (Two Pointers)
+**Hours Logged:** 1.5h
+
+### Problem 1: Dutch National Flag
+* **The Bug (Algorithmic & C++):** Got stuck trying to strictly use two pointers. Missed the need for a three-pointer partition (`low`, `high`, `i`). Also, initializing `int high = arr.size() - 1;` without checking for an empty array relies on dangerous unsigned-to-signed underflow truncation (`SIZE_MAX` truncating to `-1`).
+* **The Fix (Algorithmic & C++):** Used a three-pointer approach with a `switch` statement. Passed `arr` as `const std::vector<int>&` to copy it locally without mutating the caller's array.
+
+### Problem 2: Quadruple Sum to Target
+* **The Bug (Integer Promotion):** Wrote `long long sum = arr[i] + arr[j] + arr[k] + arr[l];`. Because all operands are `int`, the addition is executed as a 32-bit `int` addition (which can overflow) *before* the result is assigned to the `long long`.
+* **The Fix (Integer Promotion):** Explicitly cast the first operand to force 64-bit addition across the whole expression: `long long sum = static_cast<long long>(arr[i]) + arr[j] + arr[k] + arr[l];`.
+* **The Process Win (Debugging):** Made classical loop/index typos (`i++` instead of `j++`, `j!=1` instead of `j!=i+1`). Instead of using print statements, successfully spun up `lldb` in the terminal to trace execution and isolate the bugs. Excellent systems engineering hygiene.
+
+### Problem 3: Comparing Strings containing Backspaces
+* **The Bug (Algorithmic):** Attempted to process backspaces directly in the main loop, failing to handle cascading backspaces (e.g., `a#c#`). Also risked an out-of-bounds segfault if one string was fully processed (`r1 < 0`) while the other wasn't.
+* **The Fix (Algorithmic):** Refactored the core backspace logic into a dedicated helper function (`getNextValidCharIndex`) that properly counts and resolves cascading deletes. Explicitly handled negative index edge cases (`i1 < 0 || i2 < 0`) before making the array access comparison.
