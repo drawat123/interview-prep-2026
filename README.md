@@ -86,3 +86,10 @@
 ### Problem 3: Comparing Strings containing Backspaces
 * **The Bug (Algorithmic):** Attempted to process backspaces directly in the main loop, failing to handle cascading backspaces (e.g., `a#c#`). Also risked an out-of-bounds segfault if one string was fully processed (`r1 < 0`) while the other wasn't.
 * **The Fix (Algorithmic):** Refactored the core backspace logic into a dedicated helper function (`getNextValidCharIndex`) that properly counts and resolves cascading deletes. Explicitly handled negative index edge cases (`i1 < 0 || i2 < 0`) before making the array access comparison.
+
+## [2026-07-16] Thursday
+**Focus:** Modern C++ Mastery (Effective Modern C++)
+**Hours Logged:** 1.5h
+
+* **The Execution:** Read Items 1 & 2 (Template and `auto` type deduction). Mastered the three core deduction cases (Reference, Universal Reference, Pass-by-Value). 
+* **The Process Win (Systems Safety):** Correctly identified the `auto` performance trap. Realized that `auto` strips reference and `const` qualifiers during pass-by-value deduction, which causes massive, unintentional heap allocations if large containers returned by `const&` are accidentally assigned to plain `auto` instead of `const auto&`.
