@@ -208,25 +208,23 @@ LMAX Disruptor, folly, abseil).
 
 ---
 
-## The Flagship Project — C++ Telemetry Engine  🔄
+## The Flagship Project — C++ micro-redis  🔄
 
-Port `micro-thingsboard`'s proven design into modern C++. Design is already
-solved, so spend 100% on systems concerns. This is your portfolio centerpiece
-and neutralizes the "MFC is stale" concern by being demonstrably modern C++.
+Build an in-memory Key-Value store from scratch in modern C++. This is your portfolio centerpiece and neutralizes the "MFC is stale" concern by being demonstrably modern C++ systems engineering.
 
 **Build order:**
-1. **Edge agent in C++20** — collect OS metrics (parse `/proc`), RAII everywhere, smart pointers, `std::chrono` sampling
-2. **Wire format** — reuse Protobuf (C++ codegen) or hand-roll a binary framing (great systems exercise); length-prefix framing
-3. **`epoll`-based ingestion server** — non-blocking sockets, reactor pattern; then add an **`io_uring`** variant and benchmark the difference
-4. **Lock-free SPSC/MPSC queue** between the network thread and worker pool (not a `BlockingQueue`)
-5. **Custom memory pool / arena** for the hot path; measure allocation reduction
-6. **Instrumentation** — latency percentiles (p50/p99/p999), throughput; run under ASan/TSan; profile with `perf` + flamegraph
-7. **Write-up** — "Java design → C++ hot-path reimplementation," with numbers and a hard tradeoff (e.g., queue design, allocator choice)
+1. **Basic KV & Command Parser** — `GET`, `SET`, `DEL`. Modern C++ string manipulation (`std::string_view`), RAII everywhere, smart pointers.
+2. **Wire format (RESP)** — Implement the Redis Serialization Protocol (RESP) to allow the real `redis-cli` to natively connect to it.
+3. **`epoll`-based async server** — non-blocking sockets, event loop reactor pattern; then add an **`io_uring`** variant and benchmark the difference.
+4. **Data Structures** — Implement Sorted Sets (`ZADD`) using a Skiplist, and Expiring keys (TTL) using a min-heap or timing wheel.
+5. **Custom memory pool / arena** for the hot path; measure allocation reduction.
+6. **Instrumentation** — latency percentiles (p50/p99/p999), throughput; run under ASan/TSan; profile with `perf` + flamegraph.
+7. **Write-up** — "Building a Redis clone in Modern C++," with numbers and hard tradeoffs (e.g., event loop design, allocator choice).
 
 **Tooling:** CMake, clang/gcc, gdb, sanitizers, clang-tidy, Google Benchmark,
 GoogleTest. Keep it Linux-first.
 
-Keep the frozen Java version as the "design + comparison" artifact.
+Keep any previous backend projects as "design + comparison" artifacts.
 
 ---
 
@@ -335,7 +333,7 @@ interview-prep-2026/
 2. Start *Effective Modern C++* — 3 items/session (P1).
 3. Re-solve 4–5 past LeetCode mediums **in C++** to rebuild STL muscle (P6).
 4. Rewrite one old MFC/C++ class in modern C++ (rule-of-0, smart ptrs, RAII); run clang-tidy + ASan.
-5. Freeze `micro-thingsboard` (finish the DLQ bean), then scaffold the C++ flagship repo with CMake + GoogleTest + sanitizers wired in.
+5. Scaffold the `micro-redis` flagship repo with CMake + GoogleTest + sanitizers wired in.
 6. Skim OSTEP intro + start the virtualization (memory) section (P2).
 
 ---

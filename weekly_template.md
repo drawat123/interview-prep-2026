@@ -95,7 +95,7 @@ interview-prep-2026/                 # PREP ONLY (exercises, notes, log)
 └── README.md                        # daily_log (engineering changelog for your brain)
 
 # The C++ FLAGSHIP lives in its OWN repo (portfolio, not prep):
-#   ~/Documents/Study/micro-thingsboard-cpp/
+#   ~/Documents/Study/micro-redis/
 ```
 
 ---

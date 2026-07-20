@@ -51,7 +51,7 @@
   * **Dropped:** Microservices design patterns. DataLemur SQL (`03_datalemur_sql` archived from core prep, kept strictly as a weekend hobby).
   * **Added pillars:** Modern C++ mastery (`05_cpp_mastery`), OS fundamentals (`06_os_systems`), concurrency/lock-free (`07_concurrency`), systems programming + networking (`08_systems_programming`), performance engineering (`09_performance`), low-level design (`04_low_level_design`).
   * **Kept:** DSA (now coded in **C++**, not Java) and high-level system design (still tested for infra roles).
-  * **Side project:** freeze `micro-thingsboard` (Java) as a design/comparison artifact; new flagship = the same telemetry engine rebuilt in **modern C++** in its own repo (`micro-thingsboard-cpp`).
+  * **Side project:** freeze backend projects as design/comparison artifacts; new flagship = an in-memory KV store rebuilt in **modern C++** in its own repo (`micro-redis`).
 * **Biggest risk to close:** 4 yrs of C++ was MFC-era — must prove *modern* C++ (C++17/20). Modern-C++ mastery is front-loaded (Phase 0).
 * **Reference:** full plan in `systems_roadmap.md`; revised cadence in `weekly_template.md`.
 
@@ -93,3 +93,10 @@
 
 * **The Execution:** Read Items 1 & 2 (Template and `auto` type deduction). Mastered the three core deduction cases (Reference, Universal Reference, Pass-by-Value). 
 * **The Process Win (Systems Safety):** Correctly identified the `auto` performance trap. Realized that `auto` strips reference and `const` qualifiers during pass-by-value deduction, which causes massive, unintentional heap allocations if large containers returned by `const&` are accidentally assigned to plain `auto` instead of `const auto&`.
+
+## [2026-07-17] Friday
+**Focus:** Performance Engineering (Cache Locality)
+**Hours Logged:** 1.5h
+
+* **The Execution:** Ran a C++ sandbox comparing Row-by-Row vs Column-by-Column matrix traversals. Measured a massive >4x performance degradation despite identical `O(N)` theoretical time complexity.
+* **The Blindspot (Hardware Architecture):** Didn't understand how CPU Cache Lines work under the hood. Learned that CPUs fetch RAM in 64-byte chunks. Column-major traversal destroys spatial locality, causing a hardware "Cache Miss" on every single iteration and forcing the CPU to sit idle waiting for RAM.
