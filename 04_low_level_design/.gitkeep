@@ -1,0 +1,3 @@
+# Pillar P7 — Low-Level System Design (placeholder; populate when you start it).
+# Drill catalog: LRU/LFU cache, allocator/arena/object pool, thread pool,
+# lock-free SPSC/MPSC queue, in-memory KV store, rate limiter. See README.

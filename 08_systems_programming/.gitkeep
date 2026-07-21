@@ -1,0 +1,3 @@
+# Pillar P4 — Systems Programming (Linux/POSIX) + Networking (placeholder).
+# epoll/io_uring, non-blocking sockets, mmap/zero-copy, TCP internals. See README.
+# (micro-redis is the main sockets+epoll showcase; add standalone drills here.)
